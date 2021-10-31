@@ -3,11 +3,11 @@
 
 ### What is the problem that you will be investigating? Why is it interesting?
 
-For our CS 301 Data Science project we will be creating a digit recognizer that is able to assign labels handwritten digits. This problem is interesting as it will allow written text to be digitized as values within a computer. Some applications of this technology could be for professors to quickly collect grades for students after hand grading papers. Another application would be to collect dates, prices and times  from historical English written documents and records.
+For our CS 301 Data Science project we will be creating a digit recognizer that is able to assign labels to handwritten digits. This problem is interesting as it will allow written digits to be digitized as values within a computer. Some applications of this technology could be for professors to quickly collect grades for students after hand grading papers. Another application would be to collect dates, prices and times from historical English written documents and records.
 
 ### What data will you use? If you are collecting new data, how will you do it?
 
-MNIST ("Modified National Institute of Standards and Technology") is an important dataset in computer vision that has laid the foundation for classification algorithms through its collection of handwritten of images. The MNIST dataset consists of 60,000 training images of handwritten digits. If necessary, we will also test from the CENPARMI, CEDAR databases. 
+MNIST ("Modified National Institute of Standards and Technology") is an important dataset in computer vision that has laid the foundation for classification algorithms through its collection of handwritten of images. The MNIST dataset consists of 60,000 training images of handwritten digits. If necessary, we will also test from the CENPARMI, CEDAR databases handwritten digit datasets. 
 
 ### What reading will you examine to provide context and background?
 
