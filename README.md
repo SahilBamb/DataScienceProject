@@ -19,9 +19,7 @@ Based on our preliminary research, using a neural network approach to solve this
 
 ### How will you evaluate your results? Qualitatively, what kind of results do you expect (e.g. plots or figures)? Quantitatively, what kind of analysis will you use to evaluate and/or compare your results (e.g. what performance metrics or statistical tests)?
 
-We will evaluate each approach's results based on accuracy as well as time of execution. We can compare results by plotting each in respect to the time to complete and accuracy. 
-
-[We need to add statistical tests] 
+We will evaluate each approach's results based on accuracy as well as time of execution. We can compare results by plotting each in respect to the time to complete and accuracy. This will be done in a line chart and bar chart. 
 
 ## Works Cited
 Liu, C. L., Nakashima, K., Sako, H., & Fujisawa, H. (2003). Handwritten digit recognition: benchmarking of state-of-the-art techniques.  _Pattern recognition_,  _36_(10), 2271-2285.
