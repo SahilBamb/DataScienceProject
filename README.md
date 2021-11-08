@@ -19,13 +19,11 @@ Primarily we will be using Goodfellow et al.'s paper **Multi-digit Number Recogn
 
 ### What method or algorithm are you proposing? If there are existing implementations, will you use them and how? How do you plan to improve or modify such implementations? You don’t have to have an exact answer at this point, but you should have a general sense of how you will approach the problem you are working on.
 
-We will be approaching this model based on Goodfellow et al.'s paper by implementing the DistBelief Neural Network due to its ability to manage large scale neural networks. This will consistent of unifying the localization, segmentation and recognition by using a pixel approach. Additionally, it will use a new output layer to provide conditional p
-
-Based on our research, we believe the model will perform best with a deep architecture (with many layers) and hopefully approach human levels of digit recognizing performance. 
+We will be approaching this model based on Goodfellow et al.'s paper by implementing the DistBelief Neural Network due to its ability to manage large scale neural networks. This will consistent of unifying the localization, segmentation and recognition by using a pixel-by-pixel approach. Based on our research, we believe the model will perform best with a deep architecture (with many layers) and hopefully approach human levels of digit recognizing performance. 
 
 ### How will you evaluate your results? Qualitatively, what kind of results do you expect (e.g. plots or figures)? Quantitatively, what kind of analysis will you use to evaluate and/or compare your results (e.g. what performance metrics or statistical tests)?
 
-In the experiment, we will evaluate our approach based on the test dataset's of publicly available Street View House Numbers SVHN. But in terms of effective improvement, we will compare our efficiency to previous incarnations of multi-digit recognizers that approach 90%. Achieving human accuracy of 95% or higher will be the goal of our project. 
+In the experiment, we will evaluate our approach based on the test datasets of publicly available Street View House Numbers SVHN. But in terms of effective improvement, we will compare our efficiency to previous incarnations of multi-digit recognizers that approach 90%. Achieving human accuracy of 95% or higher will be the goal of our project. 
 
 
 ## Works Cited
