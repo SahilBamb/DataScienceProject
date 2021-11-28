@@ -15,7 +15,7 @@ With the prevalence of image and video data on the internet, image classificatio
 
 ## Limitations
 
-Due to changes in the tensorflow library almost every code implementation of the Goodfellow et al.'s paper had been outdated and needed small to subsantial restructuring to run. Another issue was acquring the hardware neccessary to train the model, as Google Collab would take up to twenty hours and often run over its memory allocation and crash. These two issues compounded, as many times we would only find out a certain function call was outdated only after a long training period. Due to these limitations, we did not create this Preprocessing and Convlutional Neural Network (CNN) implementation from scratch, rather we will be describing a previously made implementation made by Georgia Institute of Technology scholar Binu Enchakalody. We made small changes to this code such as adjusting hyperparameters (epochs and batch size), trained a model and used it to test unseen data. 
+Due to changes in the tensorflow library almost every code implementation of the Goodfellow et al.'s paper had been outdated and needed small to subsantial restructuring to run. Another issue was acquring the hardware neccessary to train the model, the paper implementation used a distributed DisetBelief implementaton running on over 100 computers over six days and most amateur implementations ran the training over ten hours. Using Google Collab, we had our training take up to twenty hours and often run over its memory allocation and crash. These two issues compounded, as many times we would find out a certain function call was outdated only after a long training period meaning wasted productivity. Due to these limitations, we did not create this Convlutional Neural Network (CNN) implementation from scratch, rather we will be describing a slightly changed version of a previously made implementation made by Georgia Institute of Technology scholar Binu Enchakalody. We made small changes to this code such as adjusting hyperparameters (epochs and batch size), fixed code issues and used it to train a model and used it to test unseen data. 
 
 ## Introduction
 
@@ -31,15 +31,13 @@ Another application is in [CAPTCHA (Completely Automated Public Turing test to t
 
 ### Overview of Results
 
-
+.9792
 
 ## Related Work
 
 ### Goodfellow et al. 
 
-The primary work of our project was Goodfellow et al.'s paper on [Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks.](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/42241.pdf)
-
-This paper presented a solution to solving the problem of multi-digit number recognition from street view images. Given X input image, the goal is to learn a model of P(S | X) by maximizing log P(S | X) on the training set. S, is a collection of N random variables from S1 ... SN which represent the digits of the sequence while L represents the length of the sequence. Each of these variables is discrete with a small number of possible values. L has values from 0 to 5 or above 5, and each digit has 10 possible values. This lends itself toward a softmax classifer that recieves input features extracted from X by a convolutional neural network. The softmax funciton is a function that takes in a vector of K real values and returns a vector of K values that represent probabilities: they sum to 1 and are each between 0 to 1.
+The primary work of our project was Goodfellow et al.'s paper on [Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks.](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/42241.pdf) This paper presented a solution to solving the problem of multi-digit number recognition from street view images. Given X input image, the goal is to learn a model of P(S | X) by maximizing log P(S | X) on the training set. S, is a collection of N random variables from S1 ... SN which represent the digits of the sequence while L represents the length of the sequence. Each of these variables is discrete with a small number of possible values. L has values from 0 to 5 or above 5, and each digit has 10 possible values. This lends itself toward a softmax classifer that recieves input features extracted from X by a convolutional neural network. The softmax funciton is a function that takes in a vector of K real values and returns a vector of K values that represent probabilities: they sum to 1 and are each between 0 to 1. 
 
  was modeled as a collection of N random variables for the elements as well as N representing the length of the sequence. Eachof the 
 
@@ -51,23 +49,103 @@ The most elementary version of digit recognizing problem is classifying the hand
 
 ![img](http://ufldl.stanford.edu/housenumbers/32x32eg.png)
 
-A more advanced version of this problem was introduced with the **[The Street View House Numbers (SVHN) Dataset](http://ufldl.stanford.edu/housenumbers) - format 2**. Images from the SVHN dataset are street sign pictures taken from Google Street View images. The SVHN dataset consists of 73257 digits for training and 26032 digits for testing as well as 531131 for extra training. **SVHN - Format 2 Dataset** consists of 32 by 32 pixel fully cropped individual (MNIST) digits. This dataset contains cropped, centered and cleaned and labeled images from street signs with digits ranging from 0 - 9. This problem is very similar to the previous dataset, but is slightly more challenging due to the addition of colors and fonts. Images also contain distracting digits that add some issues as well. 
+A more advanced version of this problem was introduced with the **[The Street View House Numbers (SVHN) Dataset](http://ufldl.stanford.edu/housenumbers)**. Images from the SVHN dataset are street sign pictures taken from Google Street View images. The SVHN dataset consists of 73257 digits for training and 26032 digits for testing as well as 531131 for extra training. **SVHN - Format 2 Dataset** consists of 32 by 32 pixel fully cropped individual (MNIST) digits. This dataset contains cropped, centered and cleaned and labeled images from street signs with digits ranging from 0 - 9. This problem is very similar to the previous dataset, but is slightly more challenging due to the addition of colors and fonts. Images also contain distracting digits that add some issues as well. 
 
 ![img](http://ufldl.stanford.edu/housenumbers/examples_new.png)
 
-Finally we come to the dataset that was used for this problem. An undertanding of the previous comparatively easier datasets, provides good background on why this dataset was chosen for this problem. The **SVHN - Format 1 Dataset** contains multi-digit labeled street images with numbers with 0 to 5 length whose individual digits ranged in value from 0 to 9. As the two preceding examples demonstrated, this is a substantially harder problem for a number of reasons. To begin with, the multiple digits per number within the image adds exponentially more possible classes as previously there were only 0 - 9 with a single digit context. Additionally, the images are not centered or rotated, have blurring and lighting differences. 
+Finally we come to the dataset that was used for this problem. An undertanding of the previous comparatively easier datasets provides good background on why this dataset was chosen for this problem. The **SVHN - Format 1 Dataset** contains multi-digit labeled street images, in color, with numbers with 0 to 5 length whose individual digits ranged in value from 0 to 9. As the two preceding examples demonstrated, this is a substantially harder problem for a number of reasons. To begin with, the multiple digits per number within the image adds exponentially more possible classes as previously there were only 0 - 9 with a single digit context. Additionally, the images are not centered, each can be rotated, have blurring and have lighting differences. Each image is also of variable size. **Approximately 150,000 images were used for the training set which includes 30,000 true negatives. The test set contains ~13,000 samples and a validation set is randomly chosen from 10% of the training set.** 
 
 ### Preprocessing
 
-For image normalization, mean subtraction was done for all traning and test data. 
+#### Image Normalization 
 
-Mean subtraction is done for all training and test samples [1][2]. 
+For the reasons outlined with the data, a degree of preprocessing was required to be applied to make these images suitable for best performance within the CNN. For image normalization, mean subtraction was done for all traning and test samples followed by feature normalizaiton using the mean and standard deviation. This occurs as the mean for each feature is subtracted from the respective set and then divided by the standard deviation. This applies, with the same mean and standard deviation, for the training, test and validation set. 
 
-This is followed by a feature normalization [4] using the mean and standard deviation (sd). The mean for each feature is subtracted from the training set. This is then divided by the sd. 
+#### Bounding Boxes
 
-The same mean and sd are used on all the test images. A train, test and validation set were used here. 
+**The SVHN - Format 1 Dataset** provides bounding box information for each digit of its sample files. Before inputting into the preprocessing, for ease of use this data was combined into one file. This was done as the test, traning and validation data were combined with each of their respective images, bounding box information and label information into an easily accessible file rather than load and reference each of them seperately. 
 
-Approximately 150,000 images were used for the training set which includes 30,000 true negatives. The test set contains ~13,000 samples and a validation set is randomly chosen from 10% of the training set. 
+#### Detection algorithm
+
+Premade bounding boxes are obviously not available for non-SVHN input data and thus we also include scaling, localization and sliding windows. localization is done as Image gradients and magnitude are used to create a binary mask which ignores any parts of the image without major gradient changes and avoids image elements above/below a certain size. Scaling occurs as the binary image / image is scaled ten levels by 80% each time (compared to the previous image). A 48 x 48 sliding window runs through the sample image at steps of up to 5 and ignores windows without relevant gradients. The classifier additionally removes window candidates with high likelihood of not being a digit. A final check is done for the overall confidence of it being a digit. If this is less than 70%, it is again ignored. If all of these requirements are satisifed, a local bounding box (along with liklihood) are saved. 
+
+The preceding proess of locazliaton and sliding windows often causes multiple hits so a probability mask is created using the saved bounding boxes and their predictions. One issue, espescially when working with digits, is that it will fail when close to each other. Thus, we should use non-maxima suppression to remove invalid boxes based on overlap scores. The final rsized versions of these boxes are passed to the model and if the confidence is over 80% a bounding box and digit are drawn onto the final image. 
+
+## Methods
+
+### CNN Model Explained
+
+To solve our problem of the SVHN dataset we used a CNN (convolutional neural network). There are many reasons we used CNN for our problem, firstly CNN’s take advantage of inputs being images. Images are seen as a 3D structure with those dimensions being the weight, height, and depth, depth being the RGB color channels. An advantage of having our input space being 3 dimensional is that we do not have to flatten our image pixels resulting in more information. 
+
+Secondly CNN’s use shared weights and neurons property resulting in a smaller number of weights. Lastly CNN’s have been proven to give the best results in terms of accuracy when it comes to image recognition problems which was perfect in our scenario because the SVHN problem is an image recognition problem. 
+
+Now that we know what the best model to use is, we should explain it. CNN's input is the raw pixel values of the images. Like we mentioned before, the third dimension in CNN is the depth which were our colors , that means that grey scale images which do not have any color are 2D because they will have no depth and colored images will be 3D. 
+
+Now that we know about the input it takes we can talk about the layers. CNN’s have four types of layers. Convolutional layers are the building blocks of CNN’s. A convolution is an application of a filter to an input that results in an activation, repeating the application of the same filter will result in a feature map which summarizes the presence of detected features in that input.
+
+### **Convolutional layer** 
+
+Convolutional layers are the building blocks of CNN’s. A convolution is an application of a filter to an input that results in an activation, repeating the application of the same filter will result in a feature map which summarizes the presence of detected features in that input. 
+
+### **Pooling layer**
+
+The function of the pooling layer is to reduce spatial size inturn reducing the amount of parameters and computation on the machine or network, it accomplishes this using the MAX function. This layer operates on each feature map independently, It is used for dimension reduction. This layer operates on depths independently so it takes the depths slice by slice. The figure below illustrates this very well
+
+![image-20211128103101821](/Users/sahilbambulkar/Library/Application Support/typora-user-images/image-20211128103101821.png)
+
+### **Activation layer** 
+
+The activation function is a node that is put at the end of or in between Neural Networks. They help to decide if the neuron would fire or not. In most cases and in ours we use ReLu (the rectified linear activation function). This is a piecewise linear function that will output the input directly if it is positive and if it is not it will instead output 0, the purpose of using this layer is to increase the non linearity in our images. 
+
+### **Fully Connected Layer**
+
+The final layer for CNN’s is the fully connected layer, this layer is simply feed forward neural networks. The input to these networks is the output from the final pooling or convolutional layer which is then flattened and fed into the fully connected layer, after passing through the fully connected layers , the final layer uses softmax activation function which we use to get the probabilities of the input belonging to a certain class which is the goal of our CNN.
+
+<iframe src="https://cs231n.github.io/assets/conv-demo/index.html" width="100%" height="700px;" style="border:none;"></iframe>
+
+The figure above is a running demo of a CONV layer taken from the [Stanford University Convolutional Networks courses page](https://cs231n.github.io/convolutional-networks/), it will help us better describe filters.
+
+While using CNN's multiple filters are taken to slice through an image and map them one by one in order to learn different portions of the image. That's why the figure above is so important because it helps us visualize this. Its as if we are scanning our input volume reading in all the regions.
+
+### Our layers and filters
+
+For layer 1 in our designed model we have 2 x (16 filters 3x3), we can easily break this down by looking at the picture we have provided above. We can think of the number outside the parentheses as the amount of filters that are being used for this layer in our current layer , layer 1 we have a two in that place so it's actually exactly like in our figure above we would have filters W0, and W1 as well but if we take another layer in our model for example layer 4 instead of a 2 we have a 3 so we would instead have 3 filters W0, W1, and W2. The output volume is actually the dot product of all these filters so for layer 4 it would be the dot product of W0,W1,and W2.
+
+### **Filters Per Layer**
+
+* Layer’s 1,2,3,6,8 = 2 filters
+* Layer’s 4,5,7 = 3 filters 
+
+Now that we understand what the first digit represents we can now move into what's in the parentheses. If you look at the figure again you can see that we have a column for the filters and in that column we have a label W0[ : , : , 0] and it goes until we have W0[ : , : , 2] this last number the 2 represents our first number in the parentheses so in our situation for layer 1 we have 16 filters so we would run from 0 to 16, so unlike the figure above we would only have 2 rows for our filters we would instead have 16. In our model we used many different filter sizes for our layers. I believe this is our depth.
+
+### Depth of filters
+
+- Layer 1 = 16
+- Layer 2 = 32 
+- Layer 3 = 48 
+- Layer 4 = 64 
+- Layer 5 = 128 
+- Layer’s 6,7 = 256 
+- Layer 8 = 512 
+
+We have almost completely broken down filters and conv layer operations , the last thing that we have to talk about is the filter sizes. In our figure we have a filter size of 3 by 3 meaning we have 3 rows and 3 columns, just like we have in layer 1 of our model which is also 3x3. The figure does a good job of demonstrating how the filters read in from the input volume.
+
+### Row and Column Size
+
+* Layer 1,2,3,4 = 3x3 
+
+* Layers 5,6,7,8 = 5x5
+
+### Our CNN Model implementation
+
+![image-20211127205637408](/Users/sahilbambulkar/Library/Application Support/typora-user-images/image-20211127205637408.png)
+
+This is our project's CNN model (architecture originally designed by Georgia Institute of Technology scholar Binu Enchakalody):
+
+* Activation for all layers except the final dense layer was ReLu 
+* We have six softmax outputs all connected to the final layer , the first represents the number of digits in the picture, for example the number 369 would have a number of digits of 3. 
+* Our next four outputs would be the digits themselves since our max is 4 for the amount of digits we can identify, and finally our final output is a binary digit or not output for catching true negatives. 
+* When compiling our model we used sparse categorical cross entropy for our loss.
 
 Typical mini-batch sizes are 16, 32, 64, 128, etc. The mini-batch size used here is 64(32 and 128 were tried). Each pass allows the model to take one step in the gradient descent or one update. 
 
@@ -75,40 +153,35 @@ The descent may appear noisy but in runs much faster especially when using a big
 
 For the optimizer, Adaptive Momentum Estimation (Adam) is used in all 3 models. Adam is a very effective optimizer which is a combination of both momentum (exponential weighted average) and Root Mean Square (RMS) prop. 
 
-Momentum can reduce the oscillations before convergence by accounting for the gradients from the previous steps. The hyper parameters for learning rate (α), momentum (β1) and RMS(β2) are recommended to be used at their default values of 0.001, 0.9 and 0.999. A decreasing learning rate when value loss plateaued was experimented with using SGD optimizer. Adam adapted better without any α tuning for the same. The weights for each layer were randomly initialized [3][4] by Keras to ensure the weights are not uniform. I experimented with using l1 and l2 norm regularizers to avoid the effects of over-fitting in the first few models. This was soon replaced by Drop outs after every other layer. This method randomly drops hidden units and measures their performance. Dropouts make the neurons less sensitive to the activation of specific neurons because that other neuron may shut down any time [3] Early stopping is used if the model loss plateaus for more than 5 epochs. This was experimented with validation loss as well. Each layer is batch normalization which like normalizing the input, helps the convergence [3][4]. This is applied before each max. pooling layer. 
+Momentum can reduce the oscillations before convergence by accounting for the gradients from the previous steps. The hyper parameters for learning rate (α), momentum (β1) and RMS(β2) are recommended to be used at their default values of 0.001, 0.9 and 0.999. 
 
-## Methods
+A decreasing learning rate when value loss plateaued was experimented with using SGD optimizer. Adam adapted better without any α tuning for the same. The weights for each layer were randomly initialized [3][4] by Keras to ensure the weights are not uniform. I experimented with using l1 and l2 norm regularizers to avoid the effects of over-fitting in the first few models. 
 
-### Background of CNNs
-
-To solve our problem of the SVHN dataset we used a CNN (convolutional neural network). There are many reasons we used CNN for our problem, firstly CNN’s take advantage of inputs being images. Images are seen as a 3d structure with those dimensions being the weight, height , and depth, depth being the RGB color channels. An advantage of having our input space being 3 dimensional is that we do not have to flatten our image pixels resulting in more information. 
-
-Secondly CNN’s use shared weights and neurons property resulting in a smaller number of weights. Lastly CNN’s have been proven to give the best results in terms of accuracy when it comes to image recognition problems which was perfect in our scenario because the SVHN problem is an image recognition problem. 
-
-Now that we know what the best model to use is, we should explain it. CNN's input is the raw pixel values of the images. Like we mentioned before, the third dimension in CNN is the depth which were our colors , that means that grey scale images which do not have any color are 2d because they will have no depth and colored images will be 3D. 
-
-Now that we know about the input it takes we can talk about the layers. CNN’s have four types of layers. Convolutional layers are the building blocks of CNN’s. A convolution is an application of a filter to an input that results in an activation, repeating the application of the same filter will result in a feature map which summarizes the presence of detected features in that input. 
-
-The next layer is the pooling layer, the function of this layer is to reduce spatial size inturn reducing the amount of parameters and computation on the machine or network this layer operates on each feature map independently, It is used for dimension reduction.
-
-Our third layer is our Relu layer (the rectified linear activation function). This is a piecewise linear function that will output the input directly if it is positive and if it is not it will instead output 0, the purpose of using this layer is to increase the non linearity in our images. 
-
-The final layer for CNN’s is the fully connected layer, this layer is simply feed forward neural networks. The input to these networks is the output from the final pooling or convolutional layer which is then flattened and fed into the fully connected layer, after passing through the fully connected layers , the final layer uses softmax activation function which we use to get the probabilities of the input belonging to a certain class which is the goal of our CNN. 
-
-### Our CNN Model implementation
-
-![image-20211127205637408](/Users/sahilbambulkar/Library/Application Support/typora-user-images/image-20211127205637408.png)
-
-This is our project's CNN model (originally designed by Georgia Institute of Technology scholar Binu Enchakalody):
-
-* Activation for all layers except the final dense layer was ReLu 
-* We have six softmax outputs all connected to the final layer , the first represents the number of digits in the picture, for example the number 369 would have a number of digits of 3. 
-* Our next four outputs would be the digits themselves since our max is 4 for the amount of digits we can identify, and finally our final output is a binary digit or not output for catching true negatives. 
-* When compiling our model we used sparse categorical cross entropy for our loss.
+This was soon replaced by Drop outs after every other layer. This method randomly drops hidden units and measures their performance. Dropouts make the neurons less sensitive to the activation of specific neurons because that other neuron may shut down any time [3] Early stopping is used if the model loss plateaus for more than 5 epochs. This was experimented with validation loss as well. Each layer is batch normalization which like normalizing the input, helps the convergence [3][4]. This is applied before each max. pooling layer. 
 
 ## Experiments
 
+We trained our model through 25 epochs and with a batch size of 64. We obtained a training loss of 1.536 and an accuracy of 97.92. We then compared our model and metrics with a pre-trained VGG model. The VGG model ended up having better metrics compared to our model by a significant margin. After we trained our model we ran a set of street view house numbers through our model and the VGG model. Both models didn’t correctly guess every number, and had problems in some images detecting digits as well as wrongly 
 
+classifying digits.
+
+ ![img](https://lh6.googleusercontent.com/ihYSl9OYblxv9cXW5q2FjGtrT-eC3hy0BwL6-qnS6XosTIv7T_mi6-5HqYL6VrTCwgP4eYOQWOPoFCqxRNS_TYVEkfUZgHKTuXmTqJfwlRHR7gWuSdxgIq4SmtpaBEZ-ElFjrhJD)
+
+Our model ended up performing worse but still was able to classify some digits.
+
+![img](https://lh4.googleusercontent.com/T2-zXOy6Y21fvyflo31AYgNY5nzh24UC2dAeEX1evQuIpmq5iUcl2n9ye3P4A3YYVlwzZrhQPKzxoYvNKx-eA9FAW-Q_j8ATTyEx-_f7ivcf9u89vHQFaoixYvPSduYKo1f46SNi)
+
+The VGG model also made mistakes but has overall better accuracy.
+
+![img](https://lh6.googleusercontent.com/GlJM8tbuaJZhEiV0LUPrhGnEFFB7CDa3fon5_EkrHrNbUpQ6uwOmAILXSI7v7brO7sJG8WOBfIcoqyw23_ti8EKCV_0uPEWuY7oV4ulyHi_rrGBB4cRfpUm83--BZKoRyWyBlJwQ)
+
+
+
+From the graphs you can see that the VGG model had better accuracy and loss, although interestingly our model’s validation loss was closer to the train loss compared to the VGG model.
+
+![img](https://lh6.googleusercontent.com/O4_UdW_szV5AS_Ia12BZ5tYV4RWqHeBbkP9n7vd9ZYsXnUdIKKtR5K1PU-LJGSL1MzW1nq0fsAMO_IDCyyTpDHFQu51OWFNb9HykMLPF6BJUBVhPFWgYhPlslIx2XGydiMZTYp42)
+
+Again seeing the loss values you see the VGG model performing better. The accuracy numbers are a bit deceptive, as it seems our model did better than the VGG model looking at the numbers alone. Putting it in perspective their model was run on much more images and also included more images with vertical number orientations which both models have trouble classifying correctly. If we ran the VGG model on the same data as our model it would have performed better than ours, which we saw when we ran 15 sample images through both models. The biggest factor holding our model back was our limited compute power and time. The VGG model was trained on a much larger number of images, which due to our limited memory and computing power we could not replicate. Although our model’s performance was not as good, taking into consideration the vast difference in computing power our model still performed well in our experiments.
 
 ## Conclusion
 
@@ -116,15 +189,16 @@ This is our project's CNN model (originally designed by Georgia Institute of Tec
 
 
 
-## Other Resources
+## Resources
 
-### These other resources were useful while completing this project 
+##### These other learning resources were also useful while completing this project 
 
-Udemy Course Deep Learning Convolutional Neural Networks in Python by Matthew Gregg 
+* [Udemy Course: Deep Learning Convolutional Neural Networks in Python by Matthew Gregg](https://www.udemy.com/course/deep-learning-convolutional-neural-networks-theano-tensorflow/) 
 
-MIT 6.S191: Convolutional Neural Networks Lecture
+* [MIT 6.S191: Convolutional Neural Networks Lecture](https://www.youtube.com/watch?v=iaSUYvmCekI)
 
-Stanford Lecture Series on Convolutional Neural Networks for Visual Recognition
+* [Stanford Lecture Series on Convolutional Neural Networks for Visual Recognition](https://www.youtube.com/watch?v=vT1JzLTH4G4)
+* [Evolution Of Object Detection Networks Course](https://www.youtube.com/playlist?list=PL1GQaVhO4f_jLxOokW7CS5kY_J1t1T17S)
 
 
 
