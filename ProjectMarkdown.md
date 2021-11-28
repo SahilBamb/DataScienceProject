@@ -31,7 +31,7 @@ Another application is in [CAPTCHA (Completely Automated Public Turing test to t
 
 ### Overview of Results
 
-.9792
+We were able to achieve an accuracy of XX on. Ths specifics of these results will be described more indepth below in the experiments section. 
 
 ## Related Work
 
@@ -69,7 +69,7 @@ For the reasons outlined with the data, a degree of preprocessing was required t
 
 Premade bounding boxes are obviously not available for non-SVHN input data and thus we also include scaling, localization and sliding windows. localization is done as Image gradients and magnitude are used to create a binary mask which ignores any parts of the image without major gradient changes and avoids image elements above/below a certain size. Scaling occurs as the binary image / image is scaled ten levels by 80% each time (compared to the previous image). A 48 x 48 sliding window runs through the sample image at steps of up to 5 and ignores windows without relevant gradients. The classifier additionally removes window candidates with high likelihood of not being a digit. A final check is done for the overall confidence of it being a digit. If this is less than 70%, it is again ignored. If all of these requirements are satisifed, a local bounding box (along with liklihood) are saved. 
 
-The preceding proess of locazliaton and sliding windows often causes multiple hits so a probability mask is created using the saved bounding boxes and their predictions. One issue, espescially when working with digits, is that it will fail when close to each other. Thus, we should use non-maxima suppression to remove invalid boxes based on overlap scores. The final rsized versions of these boxes are passed to the model and if the confidence is over 80% a bounding box and digit are drawn onto the final image. 
+The preceding process of locazliaton and sliding windows often causes multiple hits so a probability mask is created using the saved bounding boxes and their predictions. One issue, espescially when working with digits, is that it will fail when close to each other. Thus, we should use non-maxima suppression to remove invalid boxes based on overlap scores. The final rsized versions of these boxes are passed to the model and if the confidence is over 80% a bounding box and digit are drawn onto the final image. 
 
 ## Methods
 
@@ -91,7 +91,8 @@ Convolutional layers are the building blocks of CNN’s. A convolution is an app
 
 The function of the pooling layer is to reduce spatial size inturn reducing the amount of parameters and computation on the machine or network, it accomplishes this using the MAX function. This layer operates on each feature map independently, It is used for dimension reduction. This layer operates on depths independently so it takes the depths slice by slice. The figure below illustrates this very well
 
-![image-20211128103101821](/Users/sahilbambulkar/Library/Application Support/typora-user-images/image-20211128103101821.png)
+![image](https://user-images.githubusercontent.com/42818731/143778587-73ae5b4a-d54e-4a23-830a-b333147f4d83.png)
+
 
 ### **Activation layer** 
 
@@ -138,7 +139,8 @@ We have almost completely broken down filters and conv layer operations , the la
 
 ### Our CNN Model implementation
 
-![image-20211127205637408](/Users/sahilbambulkar/Library/Application Support/typora-user-images/image-20211127205637408.png)
+![image](https://user-images.githubusercontent.com/42818731/143778616-cd2f4f02-57ed-4fd5-95ef-a3a1a1d97c97.png)
+
 
 This is our project's CNN model (architecture originally designed by Georgia Institute of Technology scholar Binu Enchakalody):
 
@@ -147,17 +149,13 @@ This is our project's CNN model (architecture originally designed by Georgia Ins
 * Our next four outputs would be the digits themselves since our max is 4 for the amount of digits we can identify, and finally our final output is a binary digit or not output for catching true negatives. 
 * When compiling our model we used sparse categorical cross entropy for our loss.
 
-Typical mini-batch sizes are 16, 32, 64, 128, etc. The mini-batch size used here is 64(32 and 128 were tried). Each pass allows the model to take one step in the gradient descent or one update. 
-
-The descent may appear noisy but in runs much faster especially when using a big data set. Each batch was shuffled to ensure the samples were split randomly. 
-
-For the optimizer, Adaptive Momentum Estimation (Adam) is used in all 3 models. Adam is a very effective optimizer which is a combination of both momentum (exponential weighted average) and Root Mean Square (RMS) prop. 
-
-Momentum can reduce the oscillations before convergence by accounting for the gradients from the previous steps. The hyper parameters for learning rate (α), momentum (β1) and RMS(β2) are recommended to be used at their default values of 0.001, 0.9 and 0.999. 
-
-A decreasing learning rate when value loss plateaued was experimented with using SGD optimizer. Adam adapted better without any α tuning for the same. The weights for each layer were randomly initialized [3][4] by Keras to ensure the weights are not uniform. I experimented with using l1 and l2 norm regularizers to avoid the effects of over-fitting in the first few models. 
-
-This was soon replaced by Drop outs after every other layer. This method randomly drops hidden units and measures their performance. Dropouts make the neurons less sensitive to the activation of specific neurons because that other neuron may shut down any time [3] Early stopping is used if the model loss plateaus for more than 5 epochs. This was experimented with validation loss as well. Each layer is batch normalization which like normalizing the input, helps the convergence [3][4]. This is applied before each max. pooling layer. 
+* Mini batch sizes used are 64
+* Adaptive Momentum Estimation (Adam) is used in all 3 models. Adam is a very effective optimizer which is a combination of both momentum (exponential weighted average) and Root Mean Square (RMS) prop. 
+* The hyper parameters for learning rate (α), momentum (β1) and RMS(β2) are recommended to be used at their default values of 0.001, 0.9 and 0.999. 
+* Weights for each layer were randomly generated by Keras 
+* Overfitting was accounted for by Dropout Layers which randomly drops hidden units and measures their performance
+* Early stopping was implemented if the loss does not effectively move for more than 5 epochs
+* Each layer has batch normalization to help the converage (applied before each pooling layer)
 
 ## Experiments
 
