@@ -1,10 +1,4 @@
 
-
-Final Presentation (video recording) 
-Link to Slides: https://docs.google.com/presentation/d/1d5LgKyJn92J_xLIGte4ZKDs7vA3gpfvPEhMyAJtW2Ik/edit?usp=sharing Multi-Digit Recognizer on The Street View House Numbers (SVHN) Dataset Group 3: Sahil Bambulkar, Rami Elzibawi and Jacob White
-
-**
-
 # Multi-Digit Recognizer on The Street View House Numbers (SVHN) Dataset Group 3: 
 
 ### Sahil Bambulkar, Rami Elzibawi and Jacob White
@@ -23,7 +17,7 @@ The problem we are working on is correctly classifying multi-digit numbers in st
 
 Similar problems have been solved, such as optical character recognition (OCR) on constrained domains like document processing as they have many working solutions that deliver predictions with human comparable accuracy. On the other hand, Arbitrary multi-character text recognition in disparate photographs has still not been mastered. The issues arise because of the variability of fonts, colors, styles, orientations and character arrangements. As well environmental factors like lighting, shadows, and resolution, motion and focus blur. 
 
-**Why it is Important**
+### Why it is Important
 
 Multi-digit number recognition in street view images is extremely useful in our current world of digital cartography with the widespread use of online mapping applications like Google Maps and Apple Maps. With global maps from every nation on earth, the ability to set an exact address from an images pixels, combined with the geographic location of each photograph, could be extremely valuable in pinpointing the addresses of collected images. 
 
@@ -35,11 +29,10 @@ We were able to achieve an accuracy of XX on. Ths specifics of these results wil
 
 ## Related Work
 
-### Goodfellow et al. 
+### Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks - Goodfellow et al. 
 
 The primary work of our project was Goodfellow et al.'s paper on [Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks.](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/42241.pdf) This paper presented a solution to solving the problem of multi-digit number recognition from street view images. Given X input image, the goal is to learn a model of P(S | X) by maximizing log P(S | X) on the training set. S, is a collection of N random variables from S1 ... SN which represent the digits of the sequence while L represents the length of the sequence. Each of these variables is discrete with a small number of possible values. L has values from 0 to 5 or above 5, and each digit has 10 possible values. This lends itself toward a softmax classifer that recieves input features extracted from X by a convolutional neural network. The softmax funciton is a function that takes in a vector of K real values and returns a vector of K values that represent probabilities: they sum to 1 and are each between 0 to 1. 
 
- was modeled as a collection of N random variables for the elements as well as N representing the length of the sequence. Eachof the 
 
 ## Data
 
@@ -50,13 +43,13 @@ The most elementary version of digit recognizing problem is classifying the hand
 <p align="center"> 
 <img src="http://ufldl.stanford.edu/housenumbers/32x32eg.png" alt="drawing" width="300"/>
 </p>
-A more advanced version of this problem was introduced with the **[The Street View House Numbers (SVHN) Dataset](http://ufldl.stanford.edu/housenumbers)**. Images from the SVHN dataset are street sign pictures taken from Google Street View images. The SVHN dataset consists of 73257 digits for training and 26032 digits for testing as well as 531131 for extra training. **SVHN - Format 2 Dataset** consists of 32 by 32 pixel fully cropped individual (MNIST) digits. This dataset contains cropped, centered and cleaned and labeled images from street signs with digits ranging from 0 - 9. This problem is very similar to the previous dataset, but is slightly more challenging due to the addition of colors and fonts. Images also contain distracting digits that add some issues as well. 
+A more advanced version of this problem was introduced with the [The Street View House Numbers (SVHN) Dataset](http://ufldl.stanford.edu/housenumbers). Images from the SVHN dataset are street sign pictures taken from Google Street View images. The SVHN dataset consists of 73257 digits for training and 26032 digits for testing as well as 531131 for extra training. **SVHN - Format 2 Dataset** consists of 32 by 32 pixel fully cropped individual (MNIST) digits. This dataset contains cropped, centered and cleaned and labeled images from street signs with digits ranging from 0 - 9. This problem is very similar to the previous dataset, but is slightly more challenging due to the addition of colors and fonts. Images also contain distracting digits that add some issues as well. 
 <p align="center"> 
 <img src="http://ufldl.stanford.edu/housenumbers/examples_new.png" alt="drawing" width="300"/>
 </p>
-Finally we come to the dataset that was used for this problem. An undertanding of the previous comparatively easier datasets provides good background on why this dataset was chosen for this problem. The **SVHN - Format 1 Dataset** contains multi-digit labeled street images, in color, with numbers with 0 to 5 length whose individual digits ranged in value from 0 to 9. As the two preceding examples demonstrated, this is a substantially harder problem for a number of reasons. To begin with, the multiple digits per number within the image adds exponentially more possible classes as previously there were only 0 - 9 with a single digit context. Additionally, the images are not centered, each can be rotated, have blurring and have lighting differences. Each image is also of variable size. **Approximately 150,000 images were used for the training set which includes 30,000 true negatives. The test set contains ~13,000 samples and a validation set is randomly chosen from 10% of the training set.** 
+Finally we come to the dataset that was used for this problem. An undertanding of the previous comparatively easier datasets provides good background on why this dataset was chosen for this problem. The *SVHN - Format 1 Dataset* contains multi-digit labeled street images, in color, with numbers with 0 to 5 length whose individual digits ranged in value from 0 to 9. As the two preceding examples demonstrated, this is a substantially harder problem for a number of reasons. To begin with, the multiple digits per number within the image adds exponentially more possible classes as previously there were only 0 - 9 with a single digit context. Additionally, the images are not centered, each can be rotated, have blurring and have lighting differences. Each image is also of variable size. **Approximately 150,000 images were used for the training set which includes 30,000 true negatives. The test set contains ~13,000 samples and a validation set is randomly chosen from 10% of the training set.** 
 
-### Preprocessing
+## Preprocessing
 
 #### Image Normalization 
 
