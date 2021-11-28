@@ -176,12 +176,8 @@ The hardest part for the model was finding where to put the bounding box, which 
 
 <img src="https://user-images.githubusercontent.com/42818731/143780450-6204df04-8b09-4bac-abd1-2f206af59214.png" alt="drawing" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780451-9da8f3ee-c73c-4fd5-be2c-d5edf8773534.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780452-12a0419e-b24e-4b38-9449-6c3c307c1a7d.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780454-bdfb72d9-a187-4bdc-807c-07e0912f859b.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780455-912221b0-f930-4446-ac45-ceac98af904f.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780456-741429d1-f6b2-428c-b856-0d11a78882ea.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780457-31926f69-72a4-430e-810f-4ad0b0fba02d.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780458-6ca46eb4-cf99-460c-b0e1-57512133ab1d.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780459-fb09a1a2-8122-4f69-bd57-43c02d40a671.png" alt="drawing" height = "200" width="200"/>
 
-
- ![img](https://lh6.googleusercontent.com/ihYSl9OYblxv9cXW5q2FjGtrT-eC3hy0BwL6-qnS6XosTIv7T_mi6-5HqYL6VrTCwgP4eYOQWOPoFCqxRNS_TYVEkfUZgHKTuXmTqJfwlRHR7gWuSdxgIq4SmtpaBEZ-ElFjrhJD)
-
 Our model ended up performing worse but still was able to classify some digits.
 
-![img](https://lh4.googleusercontent.com/T2-zXOy6Y21fvyflo31AYgNY5nzh24UC2dAeEX1evQuIpmq5iUcl2n9ye3P4A3YYVlwzZrhQPKzxoYvNKx-eA9FAW-Q_j8ATTyEx-_f7ivcf9u89vHQFaoixYvPSduYKo1f46SNi)
 
 The VGG model also made mistakes but has overall better accuracy.
 
@@ -194,7 +190,7 @@ From the graphs you can see that the VGG model had better accuracy and loss, alt
 | Model      | Train Loss | Test Loss | Val Loss | Train Seq. Accuracy | Val Seq. Accuracy | Test Seq. Accuracy |
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | VGG Pre Train  | 0.17 | 0.76 | 0.88 | 96.62 | 87.91 | 91.24 | 
-| Our Model   | 1.536 | 2.5314 | 1.567 | 87.02 | 82.16 | 97.46 | 80.53 | 
+| Our Model   | 1.536 | 2.5314 | 1.567 | 87.02 | 82.16 | 80.53 | 
 
 ![img](https://lh6.googleusercontent.com/O4_UdW_szV5AS_Ia12BZ5tYV4RWqHeBbkP9n7vd9ZYsXnUdIKKtR5K1PU-LJGSL1MzW1nq0fsAMO_IDCyyTpDHFQu51OWFNb9HykMLPF6BJUBVhPFWgYhPlslIx2XGydiMZTYp42)
 
