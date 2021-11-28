@@ -192,8 +192,6 @@ From the graphs you can see that the VGG model had better accuracy and loss, alt
 | VGG Pre Train  | 0.17 | 0.76 | 0.88 | 96.62 | 87.91 | 91.24 | 
 | Our Model   | 1.536 | 2.5314 | 1.567 | 87.02 | 82.16 | 80.53 | 
 
-![img](https://lh6.googleusercontent.com/O4_UdW_szV5AS_Ia12BZ5tYV4RWqHeBbkP9n7vd9ZYsXnUdIKKtR5K1PU-LJGSL1MzW1nq0fsAMO_IDCyyTpDHFQu51OWFNb9HykMLPF6BJUBVhPFWgYhPlslIx2XGydiMZTYp42)
-
 Again seeing the loss values you see the VGG model performing better. The accuracy numbers are a bit deceptive, as it seems our model did better than the VGG model looking at the numbers alone. Putting it in perspective their model was run on much more images and also included more images with vertical number orientations which both models have trouble classifying correctly. If we ran the VGG model on the same data as our model it would have performed better than ours, which we saw when we ran 15 sample images through both models. The biggest factor holding our model back was our limited compute power and time. The VGG model was trained on a much larger number of images, which due to our limited memory and computing power we could not replicate. The main issue for our model was placing the bounding box in new images we fed it, which due to our smaller training data set it was not as good in placing the bounding box. Although our model’s performance was not as good, taking into consideration the vast difference in computing power our model still performed well in our experiments.
 
 ## Conclusion
