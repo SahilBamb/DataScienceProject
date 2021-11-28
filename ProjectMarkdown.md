@@ -42,17 +42,22 @@ The primary work of our project was Goodfellow et al.'s paper on [Multi-digit Nu
  was modeled as a collection of N random variables for the elements as well as N representing the length of the sequence. Eachof the 
 
 ## Data
+<p align="center"> 
+ 
+ 
+ <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.3bUmFWX_Z0ext4TbBUZdvAHaBW%26pid%3DApi&f=1" alt="drawing"/>
 
-![img](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.3bUmFWX_Z0ext4TbBUZdvAHaBW%26pid%3DApi&f=1)
-
+ 
+</p>
 The most elementary version of digit recognizing problem is classifying the handwritten digits in the Modified National Institute of Standards and Technology (MINHST) dataset. The [MINHST handwritten dataset](http://yann.lecun.com/exdb/mnist/) consists of 60,000 black and white, centered handwritten digits ranging from 0-9 within 28 pixel by 28 pixel images. This is considered a relatively simple and straightforward image classification problem because the handwritten numbers are black and white, centered, straight and not cluttered with multiple digits. 
-
-![img](http://ufldl.stanford.edu/housenumbers/32x32eg.png)
+<p align="center"> 
+<img src="http://ufldl.stanford.edu/housenumbers/32x32eg.png" alt="drawing" width="300"/>
+</p>
 
 A more advanced version of this problem was introduced with the **[The Street View House Numbers (SVHN) Dataset](http://ufldl.stanford.edu/housenumbers)**. Images from the SVHN dataset are street sign pictures taken from Google Street View images. The SVHN dataset consists of 73257 digits for training and 26032 digits for testing as well as 531131 for extra training. **SVHN - Format 2 Dataset** consists of 32 by 32 pixel fully cropped individual (MNIST) digits. This dataset contains cropped, centered and cleaned and labeled images from street signs with digits ranging from 0 - 9. This problem is very similar to the previous dataset, but is slightly more challenging due to the addition of colors and fonts. Images also contain distracting digits that add some issues as well. 
-
-![img](http://ufldl.stanford.edu/housenumbers/examples_new.png)
-
+<p align="center"> 
+<img src="http://ufldl.stanford.edu/housenumbers/examples_new.png" alt="drawing" width="300"/>
+</p>
 Finally we come to the dataset that was used for this problem. An undertanding of the previous comparatively easier datasets provides good background on why this dataset was chosen for this problem. The **SVHN - Format 1 Dataset** contains multi-digit labeled street images, in color, with numbers with 0 to 5 length whose individual digits ranged in value from 0 to 9. As the two preceding examples demonstrated, this is a substantially harder problem for a number of reasons. To begin with, the multiple digits per number within the image adds exponentially more possible classes as previously there were only 0 - 9 with a single digit context. Additionally, the images are not centered, each can be rotated, have blurring and have lighting differences. Each image is also of variable size. **Approximately 150,000 images were used for the training set which includes 30,000 true negatives. The test set contains ~13,000 samples and a validation set is randomly chosen from 10% of the training set.** 
 
 ### Preprocessing
@@ -102,9 +107,9 @@ The activation function is a node that is put at the end of or in between Neural
 
 The final layer for CNN’s is the fully connected layer, this layer is simply feed forward neural networks. The input to these networks is the output from the final pooling or convolutional layer which is then flattened and fed into the fully connected layer, after passing through the fully connected layers , the final layer uses softmax activation function which we use to get the probabilities of the input belonging to a certain class which is the goal of our CNN.
 
-<iframe src="https://cs231n.github.io/assets/conv-demo/index.html" width="100%" height="700px;" style="border:none;"></iframe>
+![image](https://user-images.githubusercontent.com/42818731/143780279-dc7e27ae-6c68-4fa5-9655-d0346f7b36e8.png)
 
-The figure above is a running demo of a CONV layer taken from the [Stanford University Convolutional Networks courses page](https://cs231n.github.io/convolutional-networks/), it will help us better describe filters.
+The figure above is a screenshot of a running demo of a CONV layer taken from the [Stanford University Convolutional Networks courses page](https://cs231n.github.io/convolutional-networks/), it will help us better describe filters.
 
 While using CNN's multiple filters are taken to slice through an image and map them one by one in order to learn different portions of the image. That's why the figure above is so important because it helps us visualize this. Its as if we are scanning our input volume reading in all the regions.
 
@@ -138,9 +143,9 @@ We have almost completely broken down filters and conv layer operations , the la
 * Layers 5,6,7,8 = 5x5
 
 ### Our CNN Model implementation
-
-![image](https://user-images.githubusercontent.com/42818731/143778616-cd2f4f02-57ed-4fd5-95ef-a3a1a1d97c97.png)
-
+<p align="center"> 
+<img src="https://user-images.githubusercontent.com/42818731/143778616-cd2f4f02-57ed-4fd5-95ef-a3a1a1d97c97.png" alt="drawing"/>
+</p>
 
 This is our project's CNN model (architecture originally designed by Georgia Institute of Technology scholar Binu Enchakalody):
 
@@ -159,9 +164,18 @@ This is our project's CNN model (architecture originally designed by Georgia Ins
 
 ## Experiments
 
-We trained our model through 25 epochs and with a batch size of 64. We obtained a training loss of 1.536 and an accuracy of 97.92. We then compared our model and metrics with a pre-trained VGG model. The VGG model ended up having better metrics compared to our model by a significant margin. After we trained our model we ran a set of street view house numbers through our model and the VGG model. Both models didn’t correctly guess every number, and had problems in some images detecting digits as well as wrongly 
+We trained our model through 25 epochs and with a batch size of 64. We obtained a training loss of 1.536 and an accuracy of 97.92. We then compared our model and metrics with a pre-trained VGG model. The VGG model ended up having better metrics compared to our model by a significant margin. After we trained our model we ran a set of street view house numbers through our model and the VGG model. Both models didn’t correctly guess every number, and had problems in some images detecting digits as well as wrongly classifying digits.
 
-classifying digits.
+The hardest part for the model was finding where to put the bounding box, which determines where the digits are located. This is challenging for the model when it is introduced to new images where it doesn’t know where the digits are located, and has to determine where to put the bounding box. The model can easily be confused with objects that resemble numbers and put the bounding boxes in areas with no numbers, also it can detect where the digits are but only put a bounding box around a few digits missing some.
+
+
+### Examples from Our Model
+<img src="https://user-images.githubusercontent.com/42818731/143779932-0a60ee62-6ff7-4a45-95f1-97e58721dacb.png" alt="drawing" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143779933-a03e50e1-5bed-41eb-ae7e-9939a1e8f793.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143779936-df766841-b88c-4f78-b430-6e2642daaf85.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143779937-45b750ba-c2ee-4bd5-ac2c-28e9a632a76a.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143779939-e63650fa-c75b-4007-8db5-649519685f70.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143779940-64fe6fb0-892b-44f3-bdcc-dbae41db462b.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143779941-b25ee199-7a26-4ef1-849d-b0fedcb10210.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143779943-14a2ecfa-1407-46a2-aacb-16a0090ec6b6.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143779944-f16e8c4a-7529-44c4-9592-303c1f5b3332.png" alt="drawing" height = "200" width="200"/>
+
+### Examples from VGG Model
+
+<img src="https://user-images.githubusercontent.com/42818731/143780450-6204df04-8b09-4bac-abd1-2f206af59214.png" alt="drawing" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780451-9da8f3ee-c73c-4fd5-be2c-d5edf8773534.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780452-12a0419e-b24e-4b38-9449-6c3c307c1a7d.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780454-bdfb72d9-a187-4bdc-807c-07e0912f859b.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780455-912221b0-f930-4446-ac45-ceac98af904f.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780456-741429d1-f6b2-428c-b856-0d11a78882ea.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780457-31926f69-72a4-430e-810f-4ad0b0fba02d.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780458-6ca46eb4-cf99-460c-b0e1-57512133ab1d.png" alt="drawing" height = "200" width="200"/> <img src="https://user-images.githubusercontent.com/42818731/143780459-fb09a1a2-8122-4f69-bd57-43c02d40a671.png" alt="drawing" height = "200" width="200"/>
+
 
  ![img](https://lh6.googleusercontent.com/ihYSl9OYblxv9cXW5q2FjGtrT-eC3hy0BwL6-qnS6XosTIv7T_mi6-5HqYL6VrTCwgP4eYOQWOPoFCqxRNS_TYVEkfUZgHKTuXmTqJfwlRHR7gWuSdxgIq4SmtpaBEZ-ElFjrhJD)
 
@@ -171,20 +185,24 @@ Our model ended up performing worse but still was able to classify some digits.
 
 The VGG model also made mistakes but has overall better accuracy.
 
+Both models struggled with the localization issue in finding where to put the bounding box, this is where most of the incorrect classifications happened. When our model was able to correctly place the bounding box it was able to classify digits fairly accurately, however it performed worse in placing the bounding box compared to the VGG model. However the VGG model also wasn’t perfect and made mistakes in placing the bounding box.
+
 ![img](https://lh6.googleusercontent.com/GlJM8tbuaJZhEiV0LUPrhGnEFFB7CDa3fon5_EkrHrNbUpQ6uwOmAILXSI7v7brO7sJG8WOBfIcoqyw23_ti8EKCV_0uPEWuY7oV4ulyHi_rrGBB4cRfpUm83--BZKoRyWyBlJwQ)
-
-
 
 From the graphs you can see that the VGG model had better accuracy and loss, although interestingly our model’s validation loss was closer to the train loss compared to the VGG model.
 
+| Model      | Train Loss | Test Loss | Val Loss | Train Seq. Accuracy | Val Seq. Accuracy | Test Seq. Accuracy |
+| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| VGG Pre Train  | 0.17 | 0.76 | 0.88 | 96.62 | 87.91 | 91.24 | 
+| Our Model   | 1.536 | 2.5314 | 1.567 | 87.02 | 82.16 | 97.46 | 80.53 | 
+
 ![img](https://lh6.googleusercontent.com/O4_UdW_szV5AS_Ia12BZ5tYV4RWqHeBbkP9n7vd9ZYsXnUdIKKtR5K1PU-LJGSL1MzW1nq0fsAMO_IDCyyTpDHFQu51OWFNb9HykMLPF6BJUBVhPFWgYhPlslIx2XGydiMZTYp42)
 
-Again seeing the loss values you see the VGG model performing better. The accuracy numbers are a bit deceptive, as it seems our model did better than the VGG model looking at the numbers alone. Putting it in perspective their model was run on much more images and also included more images with vertical number orientations which both models have trouble classifying correctly. If we ran the VGG model on the same data as our model it would have performed better than ours, which we saw when we ran 15 sample images through both models. The biggest factor holding our model back was our limited compute power and time. The VGG model was trained on a much larger number of images, which due to our limited memory and computing power we could not replicate. Although our model’s performance was not as good, taking into consideration the vast difference in computing power our model still performed well in our experiments.
+Again seeing the loss values you see the VGG model performing better. The accuracy numbers are a bit deceptive, as it seems our model did better than the VGG model looking at the numbers alone. Putting it in perspective their model was run on much more images and also included more images with vertical number orientations which both models have trouble classifying correctly. If we ran the VGG model on the same data as our model it would have performed better than ours, which we saw when we ran 15 sample images through both models. The biggest factor holding our model back was our limited compute power and time. The VGG model was trained on a much larger number of images, which due to our limited memory and computing power we could not replicate. The main issue for our model was placing the bounding box in new images we fed it, which due to our smaller training data set it was not as good in placing the bounding box. Although our model’s performance was not as good, taking into consideration the vast difference in computing power our model still performed well in our experiments.
 
 ## Conclusion
 
 **Abstract: Briefly describe your problem, approach, and key results. Should be no more than 300 words.****Introduction (10%): Describe the problem you are working on, why it’s important, and an overview of your results.** **Problem** 
-
 
 
 ## Resources
