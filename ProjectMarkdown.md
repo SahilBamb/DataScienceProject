@@ -19,7 +19,7 @@ Due to changes in the tensorflow library almost every code implementation of the
 
 ## Introduction
 
-The problem we are working on is correctly classifying multi-digit numbers in street level photographs coming from house numbers or Street View House Numbers (SVHN). In this case, a multi-digit number is a sequence of consecutive integer digits from 0-9. When determining accuracy, we will only be concerned with the recognizer’s ability to accurately predict every digit as well as return the correct number of digits. We will not be concerned with partial accuracy. One final note is that house numbers rarely go above lengths of 5 digits. The dataset we will be working on reflects this with very few training images with more than 5 or more digits. So the sequences can be considered of bounded length and the model should not return output in those cases. 
+The problem we are working on is correctly classifying multi-digit numbers in street level photographs coming from house numbers or Street View House Numbers (SVHN). In this case, a multi-digit number is a sequence of consecutive integer digits from 0-9. When determining accuracy, we will only be concerned with the recognizer’s ability to accurately predict every digit as well as return the correct number of digits. As house numbers rarely go above lengths of 5 digits. The dataset we will be working on reflects this with very few training images with more than 5 or more digits. So the sequences can be considered of bounded length and the model should not return output in those cases. 
 
 Similar problems have been solved, such as optical character recognition (OCR) on constrained domains like document processing as they have many working solutions that deliver predictions with human comparable accuracy. On the other hand, Arbitrary multi-character text recognition in disparate photographs has still not been mastered. The issues arise because of the variability of fonts, colors, styles, orientations and character arrangements. As well environmental factors like lighting, shadows, and resolution, motion and focus blur. 
 
@@ -42,18 +42,14 @@ The primary work of our project was Goodfellow et al.'s paper on [Multi-digit Nu
  was modeled as a collection of N random variables for the elements as well as N representing the length of the sequence. Eachof the 
 
 ## Data
-<p align="center"> 
- 
- 
- <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.3bUmFWX_Z0ext4TbBUZdvAHaBW%26pid%3DApi&f=1" alt="drawing"/>
 
- 
+<p align="center">  
+ <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.3bUmFWX_Z0ext4TbBUZdvAHaBW%26pid%3DApi&f=1" alt="drawing"/>
 </p>
 The most elementary version of digit recognizing problem is classifying the handwritten digits in the Modified National Institute of Standards and Technology (MINHST) dataset. The [MINHST handwritten dataset](http://yann.lecun.com/exdb/mnist/) consists of 60,000 black and white, centered handwritten digits ranging from 0-9 within 28 pixel by 28 pixel images. This is considered a relatively simple and straightforward image classification problem because the handwritten numbers are black and white, centered, straight and not cluttered with multiple digits. 
 <p align="center"> 
 <img src="http://ufldl.stanford.edu/housenumbers/32x32eg.png" alt="drawing" width="300"/>
 </p>
-
 A more advanced version of this problem was introduced with the **[The Street View House Numbers (SVHN) Dataset](http://ufldl.stanford.edu/housenumbers)**. Images from the SVHN dataset are street sign pictures taken from Google Street View images. The SVHN dataset consists of 73257 digits for training and 26032 digits for testing as well as 531131 for extra training. **SVHN - Format 2 Dataset** consists of 32 by 32 pixel fully cropped individual (MNIST) digits. This dataset contains cropped, centered and cleaned and labeled images from street signs with digits ranging from 0 - 9. This problem is very similar to the previous dataset, but is slightly more challenging due to the addition of colors and fonts. Images also contain distracting digits that add some issues as well. 
 <p align="center"> 
 <img src="http://ufldl.stanford.edu/housenumbers/examples_new.png" alt="drawing" width="300"/>
@@ -66,9 +62,15 @@ Finally we come to the dataset that was used for this problem. An undertanding o
 
 For the reasons outlined with the data, a degree of preprocessing was required to be applied to make these images suitable for best performance within the CNN. For image normalization, mean subtraction was done for all traning and test samples followed by feature normalizaiton using the mean and standard deviation. This occurs as the mean for each feature is subtracted from the respective set and then divided by the standard deviation. This applies, with the same mean and standard deviation, for the training, test and validation set. 
 
-#### Bounding Boxes
+#### General Data Preperation and Premade Bounding Boxes
 
-**The SVHN - Format 1 Dataset** provides bounding box information for each digit of its sample files. Before inputting into the preprocessing, for ease of use this data was combined into one file. This was done as the test, traning and validation data were combined with each of their respective images, bounding box information and label information into an easily accessible file rather than load and reference each of them seperately. 
+**The SVHN - Format 1 Dataset** provides bounding box information for each digit of its sample files. Before inputting into the preprocessing, for ease of use this data was combined into one file. This was done as the test, traning and validation data were combined with each of their respective images, bounding box information and label information into an easily accessible file rather than load and reference each of them seperately. Also of note, Bounding Box dimensions were used to crop a 30% padded region around each box. This is also applies to post-detection images. 
+
+Additional Data Preperation includes:
+
+* Resized to 48 x 48 pixel BGR and grayscale (although our model only used BGR)
+* Binary Digit classifer was created to detect if it was a digit or not for detection purposes
+* 5+ digits were ommitted for lack of data and becasue they rarely occur in real life. 
 
 #### Detection algorithm
 
