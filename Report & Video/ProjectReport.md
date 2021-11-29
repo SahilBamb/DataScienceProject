@@ -201,10 +201,4 @@ Again seeing the loss values you see the VGG model performing better. The VGG mo
 
 ## Conclusion
 
-**Abstract: Briefly describe your problem, approach, and key results. Should be no more than 300 words.****Introduction (10%): Describe the problem you are working on, why it’s important, and an overview of your results.** **Problem** 
-
-
-
-
-
-
+While we achieved considerable progress in our goal of developing a Multi-Digit Recognizer on The Street View House Numbers (SVHN) Dataset, our results leave a lot to be desired. We were not able to achieve Test Sequence Accuracy comparable to our comparable model with our model reaching 86.10% and the VGG Pre Trained model acehiving 91.24%. This was likely due to lack of training time stemming from inadequate hardware available. Another more significant issue was our failures with detection, as in many of our sample images we found that our classifier was not even being presented digits to classify. One potential mistake was to only rely on BGR images instead of running it on BW images with higher constrast. These were prepared in preprocessing but not used. Given more time and resources we would be able to further develop both the preprocessing, detection and classification to optimize this project. All in all, it was a great learning experience that introduced our group to implementing a CNN. Even more so, the fact that it was developed to tackle a still unsolved problem that has major impact on digital mapping by reliably assigning street numbers to digital street view images is inspiring. 
