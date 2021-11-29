@@ -156,8 +156,10 @@ We have almost completely broken down filters and convolution layer operations, 
 
 ### Our CNN Model implementation
 <p align="center"> 
-<img src="https://user-images.githubusercontent.com/42818731/143778616-cd2f4f02-57ed-4fd5-95ef-a3a1a1d97c97.png" alt="drawing"/>
+<img src="https://user-images.githubusercontent.com/42818731/143778616-cd2f4f02-57ed-4fd5-95ef-a3a1a1d97c97.png" height = 400 alt="drawing"/>
 </p>
+
+
 
 This is our project's CNN model (architecture originally designed by Georgia Institute of Technology scholar Binu Enchakalody):
 
