@@ -1,7 +1,7 @@
 
-# Multi-Digit Recognizer on The Street View House Numbers (SVHN) Dataset Group 3: 
+# Multi-Digit Recognizer on The Street View House Numbers (SVHN) Dataset  
 
-### Sahil Bambulkar, Rami Elzibawi and Jacob White
+### Group 3: Sahil Bambulkar, Rami Elzibawi and Jacob White
 
 ## Abstract
 
@@ -33,6 +33,16 @@ We were able to achieve an accuracy of XX on. Ths specifics of these results wil
 
 The primary work of our project was Goodfellow et al.'s paper on [Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks.](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/42241.pdf). This paper presented a solution to solving the problem of multi-digit number recognition from street view images. Given X input image, the goal is to learn a model of P(S | X) by maximizing log P(S | X) on the training set. S, is a collection of N random variables from S1 ... SN which represent the digits of the sequence while L represents the length of the sequence. Each of these variables is discrete with a small number of possible values. L has values from 0 to 5 or above 5, and each digit has 10 possible values. This lends itself toward a softmax classifer that recieves input features extracted from X by a convolutional neural network. The softmax funciton is a function that takes in a vector of K real values and returns a vector of K values that represent probabilities: they sum to 1 and are each between 0 to 1. 
 
+## Resources
+
+##### These other learning resources were also useful while completing this project 
+
+* [Udemy Course: Deep Learning Convolutional Neural Networks in Python by Matthew Gregg](https://www.udemy.com/course/deep-learning-convolutional-neural-networks-theano-tensorflow/) 
+
+* [MIT 6.S191: Convolutional Neural Networks Lecture](https://www.youtube.com/watch?v=iaSUYvmCekI)
+
+* [Stanford Lecture Series on Convolutional Neural Networks for Visual Recognition](https://www.youtube.com/watch?v=vT1JzLTH4G4)
+* [Evolution Of Object Detection Networks Course](https://www.youtube.com/playlist?list=PL1GQaVhO4f_jLxOokW7CS5kY_J1t1T17S)
 
 ## Data
 
@@ -194,16 +204,7 @@ Again seeing the loss values you see the VGG model performing better. The accura
 **Abstract: Briefly describe your problem, approach, and key results. Should be no more than 300 words.****Introduction (10%): Describe the problem you are working on, why it’s important, and an overview of your results.** **Problem** 
 
 
-## Resources
 
-##### These other learning resources were also useful while completing this project 
-
-* [Udemy Course: Deep Learning Convolutional Neural Networks in Python by Matthew Gregg](https://www.udemy.com/course/deep-learning-convolutional-neural-networks-theano-tensorflow/) 
-
-* [MIT 6.S191: Convolutional Neural Networks Lecture](https://www.youtube.com/watch?v=iaSUYvmCekI)
-
-* [Stanford Lecture Series on Convolutional Neural Networks for Visual Recognition](https://www.youtube.com/watch?v=vT1JzLTH4G4)
-* [Evolution Of Object Detection Networks Course](https://www.youtube.com/playlist?list=PL1GQaVhO4f_jLxOokW7CS5kY_J1t1T17S)
 
 
 
